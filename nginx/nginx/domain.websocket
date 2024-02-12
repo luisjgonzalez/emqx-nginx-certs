@@ -1,0 +1,38 @@
+
+server {
+        server_name DOMAIN;
+        root /var/www/html;
+        index index.html;
+
+
+location / {
+                proxy_pass http://emqx:8083;
+                # Aquí comienza el soporte a WebSockets
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                # Aquí termina
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto https;
+
+                proxy_redirect off;
+        }
+
+
+
+    listen 8084 ssl http2; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/DOMAIN/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/DOMAIN/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+
+
+}
+  
+
+
+
