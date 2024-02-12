@@ -18,7 +18,7 @@ while [[ -z $EMAIL  ]]
 
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 read -p "Do you want to do tests ? [N/y] :  " TEST
-if [ "$TEST" = "n" ]; then 
+if [ "$TEST" = "y" ]; then 
   staging=1
 fi
 printf "Test value : ${staging} \n"
