@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 volumes:
   vol-emqx-data:
@@ -25,7 +25,8 @@ services:
       - ./nginx/modules-enabled:/etc/nginx/modules-enabled
       - ./nginx/certbot/conf:/etc/letsencrypt
       - ./nginx/certbot/www:/var/www/certbot 
-      - ./html:/app/html:ro
+    links:
+      - emqx
 
   certbot:
     image: certbot/certbot
@@ -62,12 +63,12 @@ services:
       # DEFAULT APP SECRET
       EMQX_MANAGEMENT__DEFAULT_APPLICATION__SECRET: "${EMQX_DEFAULT_APPLICATION_SECRET}"
 
-      EMQX_ALLOW_ANONYMOUS: "false"
+      EMQX_ALLOW_ANONYMOUS: "true"
       EMQX_NOMATCH: "deny"
 
       # MONGO CONNECTION
 
-      EMQX_LOADED_PLUGINS: "emqx_recon,emqx_retainer,emqx_management,emqx_dashboard"
+      EMQX_LOADED_PLUGINS: "emqx_dashboard"
 
       EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS: 1000
 

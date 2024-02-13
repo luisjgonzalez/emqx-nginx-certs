@@ -3,13 +3,13 @@ stream {
 
 server {
     listen 1883;
-    proxy_pass MONGO_EMQX:1883;
+    proxy_pass emqx:1883;
     }
 
 
 server {
         listen 8883 ssl;
-        proxy_pass MONGO_EMQX:1883;
+        proxy_pass emqx:1883;
 
        ssl_certificate /etc/letsencrypt/live/DOMAIN/fullchain.pem; # managed by Certbot
        ssl_certificate_key /etc/letsencrypt/live/DOMAIN/privkey.pem; # managed by Certbot
