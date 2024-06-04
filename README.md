@@ -13,4 +13,6 @@ Se pedira algunos datos para poder registrar el dominio "No deben ser vacios"
   al terminar ejecutar el comando:
    - docker-compose -f production_nginx.yml up -d
 Este comando inica el servicio certbot el cual se encargar de actualizar periodicamente el Certificado
-   
+ Link video Explicativo:
+
+-  https://www.youtube.com/watch?v=hKJZyLIOy_k
